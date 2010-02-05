@@ -70,6 +70,19 @@ describe "helper" do
   end
 end
 
+describe "helper with eval" do
+  before {
+    dep 'helper eval test' do
+      helper(:helper_eval_test) do |test,ext|
+        "Come visit #{test}.#{ext || 'com'} for all your testing needs!"
+      end
+    end
+  }
+  it "should respond to the helper" do
+    Dep('helper eval test').runner.helper_eval_test('test').should == 'Come visit test.com for all your testing needs!'
+  end
+end
+
 describe "accepts_list_for behaviour" do
   before {
     make_test_deps
